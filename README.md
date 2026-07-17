@@ -58,7 +58,9 @@ python crawl.py --url <URL> --tier 2 --lang en --track modeling
 
 **Use it as a skill:** clone this repo, open Claude Code inside it, and invoke `/adscout` — the project skill in `.claude/skills/adscout/` loads `SKILL.md` + `corpus/` + `internal_capabilities.yaml` and answers through the pipelines. The corpus *is* the knowledge: when the crawler adds a file, the very next question can cite it. No re-indexing, no re-configuration.
 
-## Subscribe
+## Subscribe & distribute
+
+**The skill ships without the corpus — it's a pointer, not a package.** The thin shell in `.claude/skills/adscout/` carries no knowledge; it resolves the repo (env var → cwd → `~/.adscout` clone/pull) at every invocation, so users install once and always get the latest corpus. Porting the same pattern to an internal monorepo or Gemini: see [PORTING.md](PORTING.md).
 
 - **Today:** watch this repo — the GitHub Action crawls every Monday 08:00 UTC and auto-commits new articles.
 - **Next sprint:** the commented-out webhook step in `.github/workflows/crawl.yml` pushes threshold-passing digests to a chat channel — subscribers get pinged **only when something matters**.
