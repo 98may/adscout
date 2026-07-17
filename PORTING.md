@@ -40,11 +40,13 @@ Note: `[newsfeed]` runs `crawl.py`, so the agent surface needs shell access;
 without it the command degrades to briefing the current corpus (the rule
 handles this).
 
-- **google3:** replace `<CORPUS_ROOT>` with the absolute monorepo path (e.g.
-  `//experimental/<your-team>/adscout`). **Delete any pull/clone logic** — in a
-  monorepo everyone reads head, so freshness is automatic the moment the
-  weekly crawler CL lands. Register this shell text wherever your team keeps
-  Gemini skills (GEMINI.md, extension context, or the internal skill registry).
+- **google3 / Jetski (Agent Skills format):** a ready-made skill folder exists
+  at `skills/adscout/` in this repo — `SKILL.md` with the required YAML
+  frontmatter (name + description) and self-locating corpus-root resolution
+  (`ADSCOUT_ROOT` env var → its own repo → cwd → `~/adscout`). Copy that folder
+  to wherever your team keeps skills and set the corpus path; in a monorepo,
+  **delete the pull logic** — everyone reads head, so freshness is automatic
+  the moment the weekly crawler CL lands.
 - **Gemini CLI (external):** the same text works as a `GEMINI.md` /extension
   context file; keep a `git pull` step if the corpus lives in a git clone.
 - **Claude Code (external):** already implemented in
