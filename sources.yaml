@@ -1,0 +1,46 @@
+# AdScout source registry.
+# Discovery layer only — crawl.py reads this to find new articles.
+# Evidence tiers: 1=peer-reviewed paper, 2=official eng blog,
+#                 3=earnings/product announcement/press, 4=analyst speculation/secondary writeup
+
+sources:
+  - name: meta-engineering
+    type: rss
+    url: https://engineering.fb.com/feed/
+    default_tier: 2
+    language: en
+    track: modeling
+    filter_keywords: [ads, advertising, ranking, recommendation]
+    full_text_in_feed: true
+
+  - name: pinterest-engineering
+    type: rss
+    url: https://medium.com/feed/pinterest-engineering
+    default_tier: 2
+    language: en
+    track: modeling
+    filter_keywords: [ads, advertising, ranking, recommendation, retrieval]
+    full_text_in_feed: false
+
+  - name: arxiv-ads
+    type: arxiv_api
+    query: 'cat:cs.IR AND (all:"advertising" AND all:"ranking")'
+    default_tier: 1
+    language: en
+    track: modeling
+    full_text_in_feed: false
+
+  - name: ai-era-ads-news
+    type: rss
+    url: https://searchengineland.com/feed
+    default_tier: 3
+    language: en
+    track: ai_era_ads
+    filter_keywords: [chatgpt ads, ai ads, openai advertising, agentic, ai agents]
+    full_text_in_feed: false
+
+# --- Roadmap only, do NOT implement ---
+# - wechat official accounts: richest Chinese ads-modeling source, but no public API.
+#   Current workaround: manual ingest of secondary writeups via `crawl.py --url`.
+# - X / LinkedIn: analyst commentary lives here, but API access is restricted.
+# See README "Vision" section.

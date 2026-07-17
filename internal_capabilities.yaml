@@ -1,0 +1,23 @@
+# SANITIZED DEMO DATA — this is a fictional capability inventory for hackathon
+# demonstration purposes. It contains no real internal information.
+#
+# This file is the ONLY source of truth for the GAP comparison in SKILL.md.
+# Anything not listed here = "no information in inventory", never a guess.
+
+areas:
+  - area: bidding
+    capabilities: [tCPA, tROAS, value_based_bidding_v1]
+
+  - area: pctr
+    capabilities: [user_sequence_modeling, mmoe_multitask]
+
+  - area: retrieval
+    capabilities: [two_tower_ann]
+
+  - area: calibration
+    capabilities: [platt_scaling]
+    known_gaps: [delayed_feedback_modeling]
+
+  - area: experimentation
+    capabilities: [manual_ab_pipeline]
+    known_gaps: [automated_hypothesis_iteration]
