@@ -80,16 +80,17 @@ external_finding:     Meta's REA runs the ads-ranking experiment loop autonomous
 source_url:           https://engineering.fb.com/2026/03/17/developer-tools/ranking-engineer-agent-rea-autonomous-ai-system-accelerating-meta-ads-ranking-innovation/
 evidence_tier:        2 — official eng blog
 gap_type:             PARTIAL
-our_status:           experimentation: manual_ab_pipeline; automated_hypothesis_iteration
-                      is already in our known_gaps
+our_status:           experimentation: manual_ab_pipeline (design: go/demo-ab-pipeline);
+                      automated_hypothesis_iteration is already in our known_gaps
 why_it_matters:       This is our own declared gap shipped at production scale by a
                       competitor. Claimed 2x model accuracy / 5x engineering output
                       (claimed by Meta, tier 2) — even a fraction of that changes
                       team throughput.
-suggested_next_step:  Draft a one-pager on automated hypothesis iteration for our
-                      experimentation pipeline: start with an agent that mines our
-                      past experiment logs into a reusable insights database (REA's
-                      "historical insights" half), before any autonomous training.
+suggested_next_step:  Review go/demo-ab-pipeline, then draft a one-pager on automated
+                      hypothesis iteration for our experimentation pipeline: start
+                      with an agent that mines our past experiment logs into a
+                      reusable insights database (REA's "historical insights" half),
+                      before any autonomous training.
 confidence:           medium — tier 2, but "2x accuracy" lacks a defined metric in
                       the post; treat the number as directional.
 ```

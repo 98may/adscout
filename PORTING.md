@@ -63,6 +63,9 @@ to preserve. All analysis logic is in SKILL.md, which needs zero changes.
 
 Everything in `corpus/` is public articles, and `internal_capabilities.yaml`
 here is **fictional demo data**. Once inside google3, teams should maintain
-their own real inventory slice — at that point the file contains real internal
+their own real inventory slice — and attach real references per capability
+(`doc:` go/ links to design docs, `code:` cs/ paths), which the skill surfaces
+in briefs so `our_status` and `suggested_next_step` point straight at the doc
+to review or the code to check. At that point the file contains real internal
 information and must live only in the internal repo. Never sync it back to
 GitHub.

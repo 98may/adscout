@@ -1,23 +1,46 @@
 # SANITIZED DEMO DATA — this is a fictional capability inventory for hackathon
-# demonstration purposes. It contains no real internal information.
+# demonstration purposes. It contains no real internal information; all doc/code
+# links below are fake placeholders showing the schema.
 #
 # This file is the ONLY source of truth for the GAP comparison in SKILL.md.
 # Anything not listed here = "no information in inventory", never a guess.
+#
+# Schema: each capability is either a bare name, or a map with optional
+# references — the skill surfaces these links in briefs so next steps point
+# at real docs and code:
+#   - name: <capability>
+#     doc:  <design doc link, e.g. go/... or a Drive URL>
+#     code: <code location, e.g. a cs/ path or repo path>
 
 areas:
   - area: bidding
-    capabilities: [tCPA, tROAS, value_based_bidding_v1]
+    capabilities:
+      - name: tCPA
+        doc: go/demo-tcpa-design
+      - name: tROAS
+      - name: value_based_bidding_v1
+        doc: go/demo-vbb-v1
+        code: ads/bidding/vbb/
 
   - area: pctr
-    capabilities: [user_sequence_modeling, mmoe_multitask]
+    capabilities:
+      - name: user_sequence_modeling
+        code: ads/pctr/seq/
+      - name: mmoe_multitask
 
   - area: retrieval
-    capabilities: [two_tower_ann]
+    capabilities:
+      - name: two_tower_ann
+        doc: go/demo-two-tower
+        code: ads/retrieval/ann/
 
   - area: calibration
-    capabilities: [platt_scaling]
+    capabilities:
+      - name: platt_scaling
     known_gaps: [delayed_feedback_modeling]
 
   - area: experimentation
-    capabilities: [manual_ab_pipeline]
+    capabilities:
+      - name: manual_ab_pipeline
+        doc: go/demo-ab-pipeline
     known_gaps: [automated_hypothesis_iteration]

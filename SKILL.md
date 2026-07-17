@@ -66,6 +66,11 @@ Classify every extracted finding:
 - **Never fabricate internal capabilities.** Anything not present in the yaml =
   "no information in inventory". The yaml's `known_gaps` entries are
   pre-acknowledged gaps — cite them when relevant.
+- Inventory entries may carry `doc` (design doc link) and `code` (code
+  location) references. Whenever you name an inventory capability — in a HAVE
+  verdict or in a brief's `our_status` — include its links so the reader can
+  jump straight to the doc/code. If a relevant doc exists, prefer a
+  `suggested_next_step` that starts from it (e.g. "Review <doc> and …").
 
 ### Step 3 — Opportunity brief (PARTIAL and MISSING only)
 
