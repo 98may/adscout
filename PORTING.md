@@ -57,9 +57,17 @@ handles this).
 
 | | GitHub world (this repo) | google3 world |
 |---|---|---|
-| Corpus production | Action, Mondays 08:00 UTC, auto-commit | scheduled job runs `crawl.py`, submits a CL |
-| User freshness | thin shell runs `git pull` at invocation | free — everyone reads head |
+| Corpus production | Action, Mondays 08:00 UTC, auto-commit | scheduled job runs `crawl.py` and **mails a CL; a human reviews and submits** (~5 min/week) |
+| User freshness | thin shell runs `git pull` on request | free — everyone reads head once the CL lands |
 | Skill updates | symlink/clone follows the repo | shell text rarely changes; rules SKILL.md updates land as CLs |
+
+The weekly review is a feature, not friction: crawled external text ends up in
+every teammate's AI context, so a human skim of new articles is the one
+injection/quality gate in the pipeline (fix a mislabeled tier, drop marketing
+fluff, catch anything adversarial). Keep it unless volume forces you to
+explore auto-submit rules for generated-data directories — and if you move the
+corpus out of the source tree to avoid review entirely, know that you are
+removing that gate.
 
 `crawl.py`'s discovery layer (RSS/arXiv fetching) may need rewriting against
 internal fetch/egress infrastructure; the processing contract (frontmatter
