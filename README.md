@@ -26,7 +26,8 @@ Keeping up is a part-time job nobody has. AdScout does it as a skill.
              crawl.py ── full-text fetch          (best effort; degrades to
                   │                                full_text: pending, never fails)
                   ▼
-             corpus/*.md  ◄── weekly GitHub Action auto-commit
+             corpus/*.md  ◄── weekly crawl job auto-commit
+                              (GitHub Action here; a scheduled CL job in google3)
    (frontmatter: tier, track, lang, company)
                   │
                   ▼            internal_capabilities.yaml
@@ -56,22 +57,24 @@ python crawl.py
 python crawl.py --url <URL> --tier 2 --lang en --track modeling
 ```
 
-**Use it as a skill:** clone this repo, open Claude Code inside it, and invoke `/adscout` — the project skill in `.claude/skills/adscout/` loads `SKILL.md` + `corpus/` + `internal_capabilities.yaml` and answers through the pipelines. The corpus *is* the knowledge: when the crawler adds a file, the very next question can cite it. No re-indexing, no re-configuration.
+**Use it as a skill (Google / Gemini — the target users):** follow [PORTING.md](PORTING.md) — copy the portable core into a google3 path, register the ~10-line thin shell wherever your team keeps Gemini skills, and point it at that path. Freshness is automatic: the weekly crawler CL lands, everyone reads head, the very next question can cite the new article. No re-indexing, no re-configuration, no skill updates ever.
+
+This GitHub repo is the external dev/demo copy; it carries an equivalent thin shell for Claude Code (`.claude/skills/adscout/`) so the demo runs anywhere. The corpus *is* the knowledge in both worlds.
 
 ## Subscribe & distribute
 
-**The skill ships without the corpus — it's a pointer, not a package.** The thin shell in `.claude/skills/adscout/` carries no knowledge; it resolves the repo (env var → cwd → `~/.adscout` clone/pull) at every invocation, so users install once and always get the latest corpus. Porting the same pattern to an internal monorepo or Gemini: see [PORTING.md](PORTING.md).
+**The skill ships without the corpus — it's a pointer, not a package.** The thin shell carries no knowledge; it reads the canonical corpus location at every invocation, so users install once and always get the latest corpus (in google3: reading head *is* the update mechanism; in this external copy: the shell does a best-effort `git pull`). See [PORTING.md](PORTING.md).
 
-- **Today:** watch this repo — the GitHub Action crawls every Monday 08:00 UTC and auto-commits new articles.
-- **Next sprint:** the commented-out webhook step in `.github/workflows/crawl.yml` pushes threshold-passing digests to a chat channel — subscribers get pinged **only when something matters**.
-- **Later:** each team maintains its own `internal_capabilities.yaml` slice; opportunity briefs convert to experiment proposals one-click.
+- **Today:** the weekly crawl job (Mondays 08:00 UTC — GitHub Action here, a scheduled CL job internally) auto-commits new articles; anyone with the skill installed asks "generate digest" and gets the latest week.
+- **Next sprint:** the crawl job additionally pushes threshold-passing digests to a chat channel (see the commented-out webhook step in `.github/workflows/crawl.yml`) — subscribers get pinged **only when something matters**, no skill required.
+- **Later:** each team maintains its own real `internal_capabilities.yaml` slice with `doc:`/`code:` links; opportunity briefs convert to experiment proposals one-click.
 
 ## Demo script (4 scenes)
 
-1. **Hard answer** — `/adscout What have Meta and Kuaishou shipped recently on RL/generative models in ads ranking, and what applies to our auction?` → 3 briefs, tier badges, cross-language sources, verb-first next steps. (See `examples/hard-answer.md`.)
-2. **Confidence downgrade** — `/adscout What modeling techniques does AppLovin Axon use?` → "No first-party sources available", tier-4 only, confidence capped at low. The skill refusing to bluff *is* the feature. (See `examples/low-confidence.md`.)
-3. **Strategic signal** — `/adscout What does the ChatGPT ads pricing evolution tell us?` → "no industry consensus on pricing single-slot AI answers". Transform Internal Workflows is its body, AI Surface Monetization is its eyes. (See `examples/strategic-signal.md`.)
-4. **Live ingest** — `python crawl.py --url <fresh article> --tier 2 --lang en --track modeling` (3 seconds), then immediately `/adscout` a question about the new article. Show the green weekly-crawl runs in the Actions tab as the standing subscription layer.
+1. **Hard answer** — ask AdScout: *"What have Meta and Kuaishou shipped recently on RL/generative models in ads ranking, and what applies to our auction?"* → 3 briefs, tier badges, cross-language sources, verb-first next steps. (See `examples/hard-answer.md`.)
+2. **Confidence downgrade** — ask: *"What modeling techniques does AppLovin Axon use?"* → "No first-party sources available", tier-4 only, confidence capped at low. The skill refusing to bluff *is* the feature. (See `examples/low-confidence.md`.)
+3. **Strategic signal** — ask: *"What does the ChatGPT ads pricing evolution tell us?"* → "no industry consensus on pricing single-slot AI answers". Transform Internal Workflows is its body, AI Surface Monetization is its eyes. (See `examples/strategic-signal.md`.)
+4. **Live ingest** — `python crawl.py --url <fresh article> --tier 2 --lang en --track modeling` (3 seconds), then immediately ask AdScout about the new article. Show the green weekly-crawl runs as the standing subscription layer.
 
 ## Vision & theme mapping
 
