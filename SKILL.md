@@ -125,6 +125,47 @@ Example framings (calibration, not templates):
 
 ---
 
+## Commands
+
+Besides free-form questions, AdScout answers three bracket commands (also
+accept the bare word without brackets):
+
+### `[newsfeed]` — pull fresh articles, then brief what matters
+
+1. Run the crawler: `python crawl.py` from the corpus root (requires shell
+   access; if unavailable, say so and continue with step 2 on the current
+   corpus). Note which corpus files are new.
+2. Score the new items (digest rules below) and output a **newsfeed**:
+   - a headline list of all new items — date, tier badge, track, one-line
+     summary, newest first;
+   - for new `modeling` items scoring ≥7: run the full Pipeline A and attach
+     the resulting opportunity briefs;
+   - for new `ai_era_ads` items scoring ≥7: attach strategic signals.
+3. If the crawl found nothing new, output the silence line from digest mode.
+
+### `[ai_ads]` — AI-era spotlight (the "what AI is doing to advertising" reel)
+
+Synthesize the corpus's strongest AI-transformation evidence across BOTH
+tracks into a stage-ready briefing with two chapters:
+
+- **AI is rewriting how ads teams work** — e.g. Meta's end-to-end
+  self-improving model pipeline (REA runs the experiment loop autonomously;
+  GEM transfers knowledge across the model fleet) — cite claimed numbers with
+  "claimed by X" + tier as always.
+- **AI is rewriting the ad market itself** — e.g. bots at 57.4% of HTTP
+  requests ("bots don't click on ads"); ChatGPT ads price discovery
+  ($60 CPM → CPC in ten weeks).
+
+Close with one combined take (2-3 lines max). Corpus-external context (e.g.
+historical bot-share baselines) must be labeled "not from corpus".
+
+### `[source]` — show the corpus, latest first
+
+Output a table of every corpus file sorted by `date` descending:
+`date | tier | track | company | title | full_text`. Follow with a one-line
+per-feed summary of `sources.yaml` (name, type, cadence) and flag any
+`full_text: pending` items as candidates for re-fetch.
+
 ## Digest mode
 
 Trigger: "generate digest [window]".

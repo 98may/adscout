@@ -32,8 +32,13 @@ On every invocation:
 1. Load <CORPUS_ROOT>/SKILL.md — it contains ALL analysis rules; follow it exactly.
 2. Load every file in <CORPUS_ROOT>/corpus/ and <CORPUS_ROOT>/internal_capabilities.yaml.
 3. Answer through the pipelines defined in SKILL.md (modeling briefs,
-   ai_era_ads strategic signals, digest mode, confidence downgrade, scope rule).
+   ai_era_ads strategic signals, digest mode, the [newsfeed]/[ai_ads]/[source]
+   commands, confidence downgrade, scope rule).
 ```
+
+Note: `[newsfeed]` runs `crawl.py`, so the agent surface needs shell access;
+without it the command degrades to briefing the current corpus (the rule
+handles this).
 
 - **google3:** replace `<CORPUS_ROOT>` with the absolute monorepo path (e.g.
   `//experimental/<your-team>/adscout`). **Delete any pull/clone logic** — in a

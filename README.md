@@ -69,12 +69,22 @@ This GitHub repo is the external dev/demo copy; it carries an equivalent thin sh
 - **Next sprint:** the crawl job additionally pushes threshold-passing digests to a chat channel (see the commented-out webhook step in `.github/workflows/crawl.yml`) — subscribers get pinged **only when something matters**, no skill required.
 - **Later:** each team maintains its own real `internal_capabilities.yaml` slice with `doc:`/`code:` links; opportunity briefs convert to experiment proposals one-click.
 
-## Demo script (4 scenes)
+## Commands
 
-1. **Hard answer** — ask AdScout: *"What have Meta and Kuaishou shipped recently on RL/generative models in ads ranking, and what applies to our auction?"* → 3 briefs, tier badges, cross-language sources, verb-first next steps. (See `examples/hard-answer.md`.)
-2. **Confidence downgrade** — ask: *"What modeling techniques does AppLovin Axon use?"* → "No first-party sources available", tier-4 only, confidence capped at low. The skill refusing to bluff *is* the feature. (See `examples/low-confidence.md`.)
-3. **Strategic signal** — ask: *"What does the ChatGPT ads pricing evolution tell us?"* → "no industry consensus on pricing single-slot AI answers". Transform Internal Workflows is its body, AI Surface Monetization is its eyes. (See `examples/strategic-signal.md`.)
-4. **Live ingest** — `python crawl.py --url <fresh article> --tier 2 --lang en --track modeling` (3 seconds), then immediately ask AdScout about the new article. Show the green weekly-crawl runs as the standing subscription layer.
+| Command | What it does |
+|---|---|
+| `[newsfeed]` | Pulls fresh articles via the crawler, then briefs what matters: headline list of new items (newest first) + auto-generated opportunity briefs / strategic signals for anything scoring ≥7. |
+| `[ai_ads]` | AI-era spotlight: two-chapter briefing — *AI rewriting how ads teams work* (Meta's self-improving REA/GEM pipeline) and *AI rewriting the ad market* (bots at 57.4% of requests, ChatGPT's $60 CPM → CPC price discovery). |
+| `[source]` | The whole corpus, newest first: `date \| tier \| track \| company \| title \| full_text`, plus the feed registry and any pending re-fetch candidates. |
+
+## Demo script (4 scenes, ~2 minutes)
+
+1. **`[source]`** *(10 seconds)* — one table: 22 articles, 2 languages, 4 feeds, tier badges. "This corpus updates itself weekly; nobody maintains it."
+2. **Hard answer** — ask: *"What have Meta and Kuaishou shipped recently on RL/generative models in ads ranking, and what applies to our auction?"* → 3 briefs with tier badges, a Chinese-language source, and next steps that point at go/-linked docs. (See `examples/hard-answer.md`.)
+3. **`[ai_ads]`** — the theme moment: Meta's ads models now improve themselves end-to-end, while on the open web the majority of "viewers" are no longer human. Transform Internal Workflows is its body, AI Surface Monetization is its eyes.
+4. **`[newsfeed]`** — the closer: live crawl on stage, new articles appear with scores, qualifying ones arrive **already briefed against our capability inventory**. "You didn't read the article. You got the gap analysis."
+
+**Q&A pocket demos:** hallucination question → ask *"What modeling techniques does AppLovin Axon use?"* → "No first-party sources available", confidence capped at low — the skill refusing to bluff *is* the feature (`examples/low-confidence.md`). Reliability question → point at the AppLovin paywall article gracefully stored as `full_text: pending`, and the green weekly-crawl runs.
 
 ## Vision & theme mapping
 

@@ -31,5 +31,5 @@ From the resolved root, load ALL of:
 ## Step 2 — Answer
 
 Follow the root `SKILL.md` exactly: Pipeline A for `modeling` articles,
-Pipeline B for `ai_era_ads`, digest mode, the confidence downgrade rule, and
-the scope rule.
+Pipeline B for `ai_era_ads`, digest mode, the `[newsfeed]` / `[ai_ads]` /
+`[source]` commands, the confidence downgrade rule, and the scope rule.
