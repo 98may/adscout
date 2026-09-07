@@ -1,7 +1,7 @@
 ---
 title: 'HubMixer: Progressive Latent Hub Mixing for Parameter-Efficient Feature Interaction
   in Recommendation'
-source_url: https://arxiv.org/abs/2608.27991v1
+source_url: https://arxiv.org/abs/2608.27991v2
 company: bytedance
 date: '2026-08-28'
 evidence_tier: 1
