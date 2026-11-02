@@ -1,7 +1,7 @@
 ---
 title: One-Step Retrieval Framework for Real-Time Sponsored Search Ads Using Hierarchical
   Text Representations
-source_url: https://arxiv.org/abs/2609.18296v1
+source_url: https://arxiv.org/abs/2609.18296v2
 company: bytedance
 date: '2026-09-16'
 evidence_tier: 1
@@ -34,7 +34,7 @@ Abstract: Traditional retrieval systems typically use multi-stage cascading arch
 
 ### References & Citations
 
-- NASA ADS
+- SciX
 
 - Google Scholar
 
